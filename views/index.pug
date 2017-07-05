@@ -1,0 +1,44 @@
+html
+  head
+    title MPs by Party
+  body
+    h1 MPs by Party
+    #chart_div
+    script(type='text/javascript', src='https://www.gstatic.com/charts/loader.js')
+    script.
+        google.charts.load('current', {packages: ['corechart', 'bar']});
+        google.charts.setOnLoadCallback(drawBasic);
+
+        function drawBasic() {
+
+              var data = new google.visualization.DataTable();
+              data.addColumn('string', 'Party');
+              data.addColumn('number', 'Number of MPs');
+
+              data.addRows(
+                [ !{parties} ]
+              );
+
+              data.sort({column: 1, desc: true});
+
+              var options = {
+                title: 'MPs by party from: beta.parliament.uk/mps',
+                chartArea: {
+                   top: 28,
+                   height: '60%'
+                },
+                height: 500,
+                legend: {position:'top'},
+                hAxis: {
+                  title: 'Parties'
+                },
+                vAxis: {
+                  title: 'MPs'
+                }
+              };
+
+              var chart = new google.visualization.ColumnChart(
+                document.getElementById('chart_div'));
+
+              chart.draw(data, options);
+            }
