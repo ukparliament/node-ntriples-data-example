@@ -2,19 +2,19 @@
   "name": "mp-bar-chart",
   "version": "1.0.0",
   "description": "A simple node app that uses n-triple data from beta.parliament.uk to display a chart on mps in each party",
-  "main": "index.js",
+  "main": "server.js",
   "respository": "https://github.com/ukparliament/node-ntriples-data-example.git",
   "scripts": {
     "test": "npm run test-unit",
-    "start": "node index.js"
+    "start": "nodemon server/server.js"
   },
   "author": "Matthew Rayner <mattrayner1@gmail.com>",
   "license": "MIT",
   "dependencies": {
     "express": "^4.15.3",
-    "follow-redirects": "^1.2.4",
-    "n3": "^0.10.0",
-    "pug": "^2.0.0-rc.2"
+    "follow-redirects": "^1.4.1",
+    "nodemon": "^1.17.2",
+    "pug": "^2.0.1"
   },
   "engines": {
     "node": "6.10"
