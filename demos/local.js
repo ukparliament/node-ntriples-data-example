@@ -1,15 +1,14 @@
 'use strict';
 
-const FILE = './data/data.nt';
-const CODE = './assets/javascripts/toJSON.js';
-
 const fs = require('fs');
-const toJSON = require(CODE);
+const toJSON = require('../assets/javascripts/toJSON');
+
+const FILE = './demos/data/data.nt';
 
 fs.open(FILE, 'r', (err, fd) => {
   if (err) {
     if (err.code === 'ENOENT') {
-      console.log(`${file} does not exist`);
+      console.log(`${FILE} does not exist`);
       return;
     }
 
@@ -22,7 +21,7 @@ fs.open(FILE, 'r', (err, fd) => {
       return;
     }
 
-    toJSON(data); // Converts to JSON here
+    console.log(toJSON(data)); // Converts to JSON here
 
     fs.close(fd, (err) => {
       if (err) {

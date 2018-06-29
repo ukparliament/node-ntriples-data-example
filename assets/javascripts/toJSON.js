@@ -1,6 +1,6 @@
 'use strict';
 
-const valueOf = require('./valueOf.js');
+const statementOf = require('./statementOf.js');
 
 let out = {};
 let subject, predicate, object;
@@ -9,9 +9,9 @@ function toJSON(data) {
 
   data.match(/.+/gm).forEach(line => {
 
-    subject    = valueOf('s', line);
-    predicate  = valueOf('p', line);
-    object     = valueOf('o', line);
+    subject    = statementOf('s', line);
+    predicate  = statementOf('p', line);
+    object     = statementOf('o', line);
 
     if (line.match('<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>')) {
       out[subject] = { '#type': object };
@@ -22,14 +22,14 @@ function toJSON(data) {
       if (!Array.isArray(out[subject][predicate])) {
         out[subject][predicate] = [out[subject][predicate]];
       }
-      out[subject][predicate] = [...out[subject][predicate], object];
+      out[subject][predicate].push(object);
     } else {
       out[subject][predicate] = object;
     }
 
   });
 
-  console.log(JSON.stringify(out, null, 2));
+  return JSON.stringify(out, null, 2);
 
 }
 
