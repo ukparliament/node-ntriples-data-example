@@ -38,7 +38,7 @@ In your browser at: [http://localhost:8080](http://localhost:8080) you should no
 
 You should see something like this:
 
-[![Application Screenshot][screenshot]][screenshot]
+![Application Screenshot](https://raw.githubusercontent.com/ukparliament/node-ntriples-data-example/master/assets/images/screenshot.png)
 
 ## Contributing
 If you wish to submit a bug fix or feature, you can create a pull request and it will be merged pending a code review.

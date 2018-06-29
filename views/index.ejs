@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title><%= page_title %></title>
+  <link rel="stylesheet" href="/stylesheets/main.css">
+</head>
+<body>
+  <h1><%= page_title %></h1>
+
+  <h2>Displaying data with JavaScript from the REST API</h2>
+  <div id="chart_div"></div>
+
+  <script src="https://www.gstatic.com/charts/loader.js"></script>
+  <script>
+
+    // Fetch data
+    fetch("http://localhost:8080/mps")
+      .then(response => response.json())
+      .then(data => {
+
+        let data_array = [];
+
+        Object.keys(data).forEach(d => {
+          if (
+            data[d].hasOwnProperty('partyName') &&
+            data[d].hasOwnProperty('count')
+          ) {
+            data_array.push([data[d].partyName, +data[d].count]);
+          }
+        })
+
+        google.charts.load('current', { packages: ['corechart'] });
+        google.charts.setOnLoadCallback(function() {
+          drawChart(data_array);
+        });
+
+      })
+      .catch(err => console.log('Fetch Error: ' + err));
+
+    // Draw chart
+    function drawChart(data_array) {
+
+      // Create the data table.
+      let data_table = new google.visualization.DataTable();
+      data_table.addColumn('string', 'Party');
+      data_table.addColumn('number', 'Number of MPs');
+      data_table.addRows(data_array);
+
+      // Instantiate and draw our chart, passing in some options.
+      var chart = new google.visualization.BarChart(
+        document.getElementById('chart_div')
+      );
+      chart.draw(data_table, {
+        title: 'MPs by party from: https://api.parliament.uk/Live/fixed-query/person_mps',
+        chartArea: { top: 28, height: '60%' },
+        width: 800,
+        height: 400,
+        legend: { position: 'top' },
+        hAxis: { title: 'Parties' },
+        vAxis: { title: 'MPs' },
+        orientation: 'horizontal'
+      });
+
+    }
+
+  </script>
+</body>
+</html>

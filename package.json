@@ -6,15 +6,13 @@
   "respository": "https://github.com/ukparliament/node-ntriples-data-example.git",
   "scripts": {
     "test": "npm run test-unit",
-    "start": "nodemon server/server.js"
+    "start": "node server.js"
   },
   "author": "Matthew Rayner <mattrayner1@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.15.3",
-    "follow-redirects": "^1.4.1",
-    "nodemon": "^1.17.2",
-    "pug": "^2.0.1"
+    "ejs": "^2.6.1",
+    "express": "^4.15.3"
   },
   "engines": {
     "node": "6.10"

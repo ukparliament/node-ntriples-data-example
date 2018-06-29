@@ -1,6 +1,6 @@
 'use strict';
 
-function valueOf(statement, line) {
+function statementOf(statement, line) {
 
   let value = undefined;
 
@@ -45,4 +45,4 @@ function valueOf(statement, line) {
 
 }
 
-module.exports = valueOf;
+module.exports = statementOf;
